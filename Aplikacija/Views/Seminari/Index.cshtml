@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Aplikacija.Models.Seminar>
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br /> <br />
+
+@using (Html.BeginForm("Index", "Seminari", FormMethod.Post))
+
+{
+    <div class="row form-group">
+        <div class="col-md-1">
+            <label>Pretraga:</label>
+        </div>
+        <div class="col-md-3">
+            @Html.TextBox("naziv", null, new { @class = "form-control", @placeholder = "Pretraga" })
+        </div>
+        <button type="submit" class="btn btn-default">Pretraži</button>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Novi", "Create", "Seminari", null, new { @class = "btn btn-primary" })
+</p>
+
+<br /> <br />
+<table class="table table-bordered">
+    <tr>
+        <td></td>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popunjen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojPolaznika)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = item.IdSeminar })
+                @Html.ActionLink("Obriši", "Delete", new { id = item.IdSeminar })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.Popunjen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojPolaznika, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.BrojPolaznika } })
+            </td>
+        </tr>
+    }
+
+</table>
+
